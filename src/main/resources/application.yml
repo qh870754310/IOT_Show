@@ -1,0 +1,31 @@
+#Tomcat配置
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+  port: 10001
+
+#Spring配置
+spring:
+  # 环境 dev|test|pro
+  #profiles:
+    #active: dev
+
+  #thymeleaf配置
+  thymeleaf:
+    cache: false   #是否开启缓存
+
+  jackson:
+    time-zone: GMT+8  #时区
+    date-format: yyyy-MM-dd #日期格式化
+
+  mvc:
+    static-path-pattern: /**        # 静态文件请求匹配方式
+    resources: # 静态资源的路径
+      static-locations: ["classpath:/static/"]
+
+#mybatis配置
+mybatis:
+  config-location: classpath:config/mybatis/mybatis-config.xml   #mybatis配置文件所在路径
+  mapper-locations: classpath:mapper/*.xml #mybatis映射文件所在路径,配置了MyBatis文件的扫描路径

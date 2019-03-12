@@ -1,0 +1,47 @@
+/* 
+* @Author: anchen
+* @Date:   2018-09-25 15:58:41
+* @Last Modified by:   anchen
+* @Last Modified time: 2018-12-03 14:04:25
+*/
+html{height:1200px;width:1920px;}
+body{margin:0;padding:0;background:url("../images/bg.jpg") no-repeat;background-size: 100% 100%;}
+ul,li{list-style: none;}
+/*通用样式*/
+.comwidth{width:1820px; margin:0 auto;}
+a{text-decoration: none;}
+img{border:none;vertical-align: middle;}
+.fl{float:left;}
+.fr{float:right;}
+
+/*清除浮动样式*/
+.clearfix:before, .clearfix:after{content:""; display:table;}
+.clearfix:after{clear:both;}
+.clearfix{*zoom:1;}
+.logo{margin-top: 50px;margin-left:50px;text-align:center;}
+.contact{text-align: right;margin-right: 50px;font-size:35px;line-height: 12px;margin-top: 30px;}
+
+.content{position: relative;}
+#shebei_con{position:absolute;}
+#shebei01{background:url("../images/shebei01.png")no-repeat;width:488px;height:223px;margin-top: 760px;}
+#shebei02{background:url("../images/shebei02.png")no-repeat;width:488px;height:197px;margin-top: -490px;}
+#shebei03{background:url("../images/shebei03.png")no-repeat;width:480px;height:234px;margin-top: -420px;margin-left:250px;}
+#shebei04{background:url("../images/shebei04.png")no-repeat;width:472px;height:266px;margin-top: -425px;margin-left:470px;}
+#shebei05{background:url("../images/shebei05.png")no-repeat;width:477px;height:254px;margin-top: -200px;margin-left:940px;}
+#shebei06{background:url("../images/shebei06.png")no-repeat;width:508px;height:185px;margin-top: -70px;margin-left:1180px;}
+#shebei07{background:url("../images/shebei07.png")no-repeat;width:491px;height:193px;margin-top: -5px;margin-left:1280px;}
+#shebei08{background:url("../images/shebei08.png")no-repeat;width:520px;height:184px;margin-top: 50px;margin-left:1320px;}
+
+
+#shebei01_con{line-height: 14px;margin-top: 50px;position:absolute;margin-left: 30px;}
+#shebei02_con{line-height: 14px;margin-top: 30px;position:absolute;margin-left: 30px;}
+#shebei03_con{line-height: 14px;margin-top: 18px;position:absolute;margin-left: 35px;}
+#shebei04_con{line-height: 14px;margin-top: 25px;position:absolute;margin-left: 40px;}
+#shebei05_con{line-height: 14px;margin-top: 15px;position:absolute;margin-left: 220px;}
+#shebei06_con{line-height: 14px;margin-top: 20px;position:absolute;margin-left: 240px;}
+#shebei07_con{line-height: 14px;margin-top: 25px;position:absolute;margin-left: 240px;}
+#shebei08_con{line-height: 14px;margin-top: 20px;position:absolute;margin-left: 240px;}
+
+
+#shebei01_con h2,#shebei02_con h2,#shebei03_con h2,#shebei04_con h2,#shebei05_con h2,#shebei06_con h2,#shebei07_con h2,#shebei08_con h2{font-size:28px;font-weight: 700;color: #034c90;}
+#shebei01_con p,#shebei02_con p,#shebei03_con p,#shebei04_con p,#shebei05_con p,#shebei06_con p,#shebei07_con p,#shebei08_con p{font-size:24px;line-height: 14px;}

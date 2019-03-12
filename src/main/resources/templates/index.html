@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <!-- 自适应屏幕宽度 -->
+    <meta name=”viewport” content=”width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no″ />
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+    <meta name="renderer" content="webkit"/>
+    <title>盛景物联设备展示平台</title>
+    <!-- 浏览器标签图片 -->
+    <link rel="shortcut icon" th:href="@{favicon.ico}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/resource/public/css/style.css}"/>
+    <script type="text/javascript" th:src="@{/resource/public/js/jquery-3.3.1.min.js}"></script>
+    <style>
+        body {
+            font: normal 100% Helvetica, Arial, sans-serif;
+        }
+        h1 {
+            font-size: 1.5em;
+        }
+        small {
+            font-size: 0.875em;
+        }
+    </style>
+</head>
+
+<body>
+<div class="top clearfix">
+    <div class="logo fl"><img th:src="@{/resource/public/images/logo.png}" alt="盛景科技"></div><!-- logo -->
+    <div class="contact fr">
+        <p>股票代码：831648</p>
+        <p style="font-size:35px;">400-646-9365</p>
+    </div>
+</div><!-- top -->
+<div class="content comwidth">
+    <div id="shebei_con">
+        <div id="shebei01">
+            <div id="shebei01_con">
+                <h2>摄像头</h2>
+                <p><a href="http://hls.open.ys7.com/openlive/7f60140bc5bc42639a8c3d51a23bec0f.hd.m3u8">当前直播</a></p>
+            </div><!-- shebei01_con -->
+        </div><!-- shebei01 -->
+        <div id="shebei02">
+            <div id="shebei02_con">
+                <h2>报警器</h2>
+                <p>当前状态：<span id="warn"></span></p>
+                <p>开关：<span id="open_bjq" class="btn">开启</span>&nbsp;&nbsp;<span id="close_bjq" class="btn">关闭</span></p>
+            </div><!-- shebei02_con -->
+        </div><!-- shebei02 -->
+        <div id="shebei03">
+            <div id="shebei03_con">
+                <h2>温湿度计</h2>
+                <p>当前温度：<span id="temperature"></span>℃</p>
+                <p>当前湿度：<span id="humidity"></span>%</p>
+            </div><!-- shebei03_con -->
+        </div><!-- shebei03 -->
+        <div id="shebei04">
+            <div id="shebei04_con">
+                <h2>PH计</h2>
+                <p>当前PH值：<span id="ph"></span></p>
+            </div><!-- shebei04_con -->
+        </div><!-- shebei04 -->
+        <div id="shebei05">
+            <div id="shebei05_con">
+                <h2>风扇</h2>
+                <p>当前状态：<span id="electric_fan"></span></p>
+                <p>开关：<span id="open_fs" class="btn">开启</span>&nbsp;&nbsp;<span id="close_fs" class="btn">关闭</span></p>
+            </div><!-- shebei05_con -->
+        </div><!-- shebei05 -->
+        <div id="shebei06">
+            <div id="shebei06_con">
+                <h2>红外移动侦测</h2>
+                <p>当前状态：<span id="device"></span></p>
+            </div><!-- shebei06_con -->
+        </div><!-- shebei06 -->
+        <div id="shebei07">
+            <div id="shebei07_con">
+                <h2>二氧化碳浓度</h2>
+                <p>当前浓度:<span id="co2"></span>ppm</p>
+            </div><!-- shebei07_con -->
+        </div><!-- shebei07 -->
+        <div id="shebei08">
+            <div id="shebei08_con">
+                <!--<h2>温度计</h2>
+                <p>当前温度：28℃</p>
+                <p>当前温度：28℃</p>-->
+            </div><!-- shebei08_con -->
+        </div><!-- shebei08 -->
+    </div><!-- shebei_con -->
+</div><!-- content -->
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    /*]]>*/
+</script>
+<script type="text/javascript">
+
+    (function(){
+        $.ajax({
+            url:'/query',
+            success: function (data) {
+                if (data.code == 0) {
+                   var $result = data.result;
+                   console.log($result);
+                   $('#temperature').text($result.value5);
+                   $('#humidity').text($result.value4);
+                   $('#electric_fan').text($result.value7 == 1 ? "运转":"停止");
+                   $('#ph').text($result.value6);
+                   $('#warn').text($result.value8 == 1 ? "异常":"正常");
+                   $('#device').text($result.value1 == 1 ? "正常":"异常");
+                   $('#co2').text($result.value3);
+                } else {
+                    alert(data.msg);
+                }
+            }
+        });
+    })();
+    setInterval(loadData,300000);
+
+    function loadData() {
+        $.ajax({
+            url:'/getData',
+            success: function (data) {
+                if (data.code == 0) {
+                    var $result = data.result;
+                    console.log($result);
+                    $('#temperature').text($result.value_3);
+                    $('#humidity').text($result.value_2);
+                    $('#electric_fan').text($result.state_3);
+                    $('#ph').text($result.value_4);
+                    $('#warn').text($result.state_4);
+                    $('#device').text($result.state_1);
+                    $('#co2').text($result.value_1);
+                } else {
+                    alert("数据加载失败!");
+                }
+            }
+        });
+    }
+
+    $(".btn").on('click', function (e) {
+        var $id = this.id;
+        var arrs = $id.split("_");
+        if (arrs[0] == "open") {
+            open(arrs[1]);
+        } else if (arrs[0] == "close") {
+            close(arrs[1]);
+        }
+    });
+
+    function open(str) {
+        if (str == "fs") {
+            $.ajax({
+                url:'/open',
+                data:{
+                    type: 1,
+                    flag: 'open'
+                },
+                success: function (result) {
+                    //刷新页面
+                    window.location.reload();
+                }
+            });
+        } else if (str == "bjq") {
+            $.ajax({
+                url:'/open',
+                data:{
+                    type: 2,
+                    flag: 'open'
+                },
+                success: function (result) {
+                    //刷新页面
+                    window.location.reload();
+                }
+            });
+        }
+    }
+
+    function close(str) {
+        if (str == "fs") {
+            $.ajax({
+                url:'/open',
+                data:{
+                    type: 1,
+                    flag: 'close'
+                },
+                success: function (result) {
+                    //刷新页面
+                    window.location.reload();
+                }
+            });
+        } else if (str == "bjq") {
+            $.ajax({
+                url:'/open',
+                data:{
+                    type: 2,
+                    flag: 'close'
+                },
+                success: function (result) {
+                    //刷新页面
+                    window.location.reload();
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>
